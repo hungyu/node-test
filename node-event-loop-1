@@ -1,0 +1,19 @@
+Promise.resolve().then(function() {
+        console.log('promise1')
+    })
+
+let index = 0
+
+function handler () {
+  if (index++ >= 10) return
+  console.log(`nextTick ${index}`)
+  process.nextTick(handler)
+  // console.log(`setImmediate ${index}`)
+  // setImmediate(handler)
+}
+
+Promise.resolve().then(function() {
+        console.log('promise2')
+    })
+
+handler()
